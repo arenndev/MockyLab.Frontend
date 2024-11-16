@@ -1,0 +1,79 @@
+<div class="container mx-auto p-4">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Sol taraf: Form kontrolleri -->
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Name</label>
+          <input
+            type="text"
+            formControlName="name"
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700"
+            >Category</label
+          >
+          <input
+            type="text"
+            formControlName="category"
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Gender</label>
+          <select
+            formControlName="genderCategory"
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+          >
+            <option *ngFor="let gender of genderCategories" [value]="gender">
+              {{ gender }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700"
+            >Design Color</label
+          >
+          <select
+            formControlName="designColor"
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+          >
+            <option *ngFor="let color of designColors" [value]="color">
+              {{ color }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700"
+            >Background Image</label
+          >
+          <input
+            type="file"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+            class="mt-1 block w-full"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          [disabled]="!form.valid"
+        >
+          {{ mockupId ? "Update" : "Create" }} Mockup
+        </button>
+      </div>
+
+      <!-- Sağ taraf: Canvas -->
+      <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-4">
+        <canvas #canvas></canvas>
+      </div>
+    </div>
+  </form>
+</div>
